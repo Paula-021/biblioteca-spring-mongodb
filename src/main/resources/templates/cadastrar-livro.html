@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css"/>
 
+    <script src="/js/script.js"></script>
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -34,6 +36,22 @@
 </head>
 <body>
 <div class="container">
+
+    <div id="confirmacao-excluir-container"
+         th:if="${confirmacaoExcluir != null}">
+        <div class="alert alert-danger alert-dismissible fade show"
+             role="alert">
+            <div th:text="${confirmacaoExcluir}"></div>
+            <button type="button" onclick="confirmarExclusao()"
+                    class="btn btn-danger btn-sim">Sim</button>
+            <a class="btn btn-secondary" th:href="@{/cadastrar-livro}">Não</a>
+        </div>
+    </div>
+    <form id="form-excluir" action="excluir-livro" method="post" hidden >
+        <input name="id" th:value="${idLivroExcluir}">
+
+    </form>
+
     <h1>Cadastro de Livros</h1>
     <!-- formulário de cadastro (input -> entrada de dados) -->
     <form class="form-group" action="cadastrar-livro" method="POST">
@@ -66,10 +84,7 @@
                 <td th:text="${livro.isbn}"></td>
                 <td>
                     <a class="btn btn-warning btn-sm" th:href="@{'/editar-livro?id='+${livro.id}}">Editar</a>
-                    <form action="excluir-livro" method="POST" style="display:inline;">
-                        <input type="hidden" th:value="${livro.id}" name="id">
-                        <button class="btn btn-danger btn-sm" type="submit">Remover</button>
-                    </form>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/excluir-livro?id='+${livro.id}}">Remover</a>
                 </td>
             </tr>
 

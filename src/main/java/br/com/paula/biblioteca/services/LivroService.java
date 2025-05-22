@@ -3,8 +3,19 @@ package br.com.paula.biblioteca.services;
 import br.com.paula.biblioteca.entities.Livro;
 import org.springframework.stereotype.Service;
 
-@Service
-public interface LivroService { //declarar métodos de serviço porém NÃO implementá-los
+import java.util.List;
 
-    public void cadastrarLivro(Livro livro);
+@Service
+public interface LivroService  {
+
+    void cadastrar(Livro livro); //declarar métodos de serviço porém NÃO implementá-los
+
+
+    List<Livro> getAll();
+
+    Livro getById(String id);
+
+    void editar(Livro livro);
+
+    void excluir(String id);
 }

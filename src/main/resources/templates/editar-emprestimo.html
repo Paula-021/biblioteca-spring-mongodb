@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Edição de Empréstimos</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="/js/script.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            margin-bottom: 10px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+
+
+    <h1>Edição de Empréstimos</h1>
+
+    <!-- Formulário de Edição de Empréstimo -->
+    <form class="form-group" th:action="@{/editar-emprestimo}" method="POST">
+        <input th:value="${emprestimo.id}" name="idEmprestimo" type="hidden">
+        <label>Livro:</label>
+        <select class="form-control" name="idLivro" required>
+            <option th:value="${emprestimo.livro.id}" selected th:text="${emprestimo.livro.titulo}"></option>
+            <th:block th:each="livro : ${livros}">
+                <option th:value="${livro.id}" th:text="${livro.titulo}"></option>
+            </th:block>
+        </select>
+        <label>Usuario:</label>
+        <select class="form-control" name="idUsuario" required>
+            <option th:value="${emprestimo.usuario.id}" selected th:text="${emprestimo.usuario.nome}"></option>
+            <th:block th:each="usuario : ${usuarios}">
+                <option th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+            </th:block>
+        </select>
+        <label>Data de Início:</label>
+        <input type="date" class="form-control" name="dataInicio" th:value="${emprestimo.dataInicio}" required>
+        <label>Data de Fim:</label>
+        <input type="date" class="form-control" name="dataFim" th:value="${emprestimo.dataFim}" required>
+
+        <button class="btn btn-primary btn-block mt-3" type="submit">Editar</button>
+    </form>
+
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
