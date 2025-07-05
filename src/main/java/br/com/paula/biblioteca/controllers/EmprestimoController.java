@@ -28,7 +28,7 @@ public class EmprestimoController {
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/cadastrar-emprestimo")
-    public String carregarPaginaCadastrarEmprestimo(Model model){
+    public String carregarPaginaCadastrarEmprestimo(Model model) {
         //lista dos emprestimos
         List<Emprestimo> emprestimos = emprestimoService.getAll();
         model.addAttribute("emprestimos", emprestimos);
@@ -42,18 +42,19 @@ public class EmprestimoController {
         model.addAttribute("usuarios", usuarios);
         return "cadastrar-emprestimo";
     }
+
     @PostMapping(value = "/cadastrar-emprestimo")
-    public String cadastrarEmprestimo(EmprestimoDTO emprestimoDTO){
+    public String cadastrarEmprestimo(EmprestimoDTO emprestimoDTO) {
         emprestimoService.cadastrar(emprestimoDTO.paraEntidade());
         return "redirect:/cadastrar-emprestimo";
     }
 
 
     @GetMapping(value = "/editar-emprestimo")
-    public String carregarPaginaEditarEmprestimo(Model model, @RequestParam String id){
+    public String carregarPaginaEditarEmprestimo(Model model, @RequestParam String id) {
         Emprestimo emprestimo = emprestimoService.getById(id);
 
-       model.addAttribute("emprestimo", emprestimo);
+        model.addAttribute("emprestimo", emprestimo);
         //lista dos livros
         List<Livro> livros = livroService.getAll();
         livros.removeIf(livro -> livro.getId().equals(emprestimo.getLivro().getId()));
@@ -65,14 +66,15 @@ public class EmprestimoController {
 
         return "editar-emprestimo";
     }
+
     @PostMapping(value = "/editar-emprestimo")
-    public String editarEmprestimo(EmprestimoDTO emprestimoDTO){
+    public String editarEmprestimo(EmprestimoDTO emprestimoDTO) {
         emprestimoService.editar(emprestimoDTO.paraEntidade());
         return "redirect:/cadastrar-emprestimo";
     }
 
     @GetMapping(value = "/excluir-emprestimo")
-    public String carregarPaginaConfirmacaoExcluirEmprestimo(Model model, @RequestParam String id){
+    public String carregarPaginaConfirmacaoExcluirEmprestimo(Model model, @RequestParam String id) {
         model.addAttribute("confirmacaoExcluir", "Deseja mesmo excluir o emprestimo?");
         model.addAttribute("idEmprestimo", id);
 
@@ -82,7 +84,7 @@ public class EmprestimoController {
     }
 
     @PostMapping(value = "/excluir-emprestimo")
-    public String excluirEmpestimo(String id){
+    public String excluirEmpestimo(String id) {
         emprestimoService.excluir(id);
         return "redirect:/cadastrar-emprestimo";
     }

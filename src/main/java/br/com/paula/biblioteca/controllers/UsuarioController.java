@@ -20,33 +20,35 @@ public class UsuarioController {
 
 
     @GetMapping(value = "/cadastrar-usuario")
-    public String carregarPaginaCadastroUsuario(Model model){
+    public String carregarPaginaCadastroUsuario(Model model) {
         List<Usuario> usuarios = usuarioService.getAll();
         model.addAttribute("usuarios", usuarios);
         return "cadastrar-usuario";
     }
+
     @PostMapping(value = "/cadastrar-usuario")
-    public String cadastrarUsuario(Usuario usuario){
+    public String cadastrarUsuario(Usuario usuario) {
         usuarioService.cadastrar(usuario);
         return "redirect:/cadastrar-usuario";
     }
 
 
     @GetMapping(value = "/editar-usuario")
-    public String carregarPaginaEditarUsuario(Model model, @RequestParam String id){
+    public String carregarPaginaEditarUsuario(Model model, @RequestParam String id) {
         Usuario usuario = usuarioService.getById(id);
         model.addAttribute("usuario", usuario);
         return "editar-usuario";
     }
+
     @PostMapping(value = "/editar-usuario")
-    public String editarUsuario(Usuario usuario){
+    public String editarUsuario(Usuario usuario) {
         usuarioService.editar(usuario);
         return "redirect:/cadastrar-usuario";
     }
 
 
     @GetMapping(value = "/excluir-usuario")
-    public String carregarCaixaConfirmacaoExcluirUsuario(Model model, @RequestParam String id){
+    public String carregarCaixaConfirmacaoExcluirUsuario(Model model, @RequestParam String id) {
         model.addAttribute("confirmacaoExcluir", "Deseja mesmo excluir o usuario?");
         model.addAttribute("idUsuarioExcluir", id);
 
@@ -54,16 +56,12 @@ public class UsuarioController {
         model.addAttribute("usuarios", usuarios);
         return "cadastrar-usuario";
     }
+
     @PostMapping(value = "/excluir-usuario")
-    public String excluirUsuario(String id){
+    public String excluirUsuario(String id) {
         usuarioService.excluir(id);
         return "redirect:/cadastrar-usuario";
     }
-
-
-
-
-
 
 
 }

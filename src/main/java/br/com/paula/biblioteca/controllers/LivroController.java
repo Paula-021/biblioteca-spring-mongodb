@@ -22,14 +22,14 @@ public class LivroController {
     //inversão de controle -> dar poder ao Spring para ele fazer certas coisas
 
     @GetMapping(value = "/cadastrar-livro") //end-point -> rota
-    public String carregarPaginaCadastroLivro(Model model){
+    public String carregarPaginaCadastroLivro(Model model) {
         List<Livro> livros = livroService.getAll();
         model.addAttribute("livros", livros);
         return "cadastrar-livro";
     }
 
     @PostMapping(value = "/cadastrar-livro")
-    public String cadastrarLivro(Livro livro){
+    public String cadastrarLivro(Livro livro) {
         //views -> controllers -> models -> daos -> banco de dados (projeto anterior - netbeans)
         //views -> controllers -> services -> repositories -> banco de dados
         livroService.cadastrar(livro);
@@ -45,14 +45,15 @@ public class LivroController {
     // a página é "compilada" os dados do backend carregados para depois ser renderizado pela engrenagem do navegador
 
     @GetMapping(value = "/editar-livro")
-    public String carregarPaginaEditarLivro(Model model, @RequestParam String id){
+    public String carregarPaginaEditarLivro(Model model, @RequestParam String id) {
         Livro livro = livroService.getById(id);
         model.addAttribute("livro", livro);
         return "editar-livro";
 
     }
+
     @PostMapping(value = "/editar-livro")
-    public String editarLivro(Livro livro, Model model){
+    public String editarLivro(Livro livro, Model model) {
         livroService.editar(livro);
         return "redirect:/cadastrar-livro";
     }
@@ -66,7 +67,7 @@ public class LivroController {
     //protected
 
     @GetMapping(value = "/excluir-livro")
-    public String carregarCaixaConfirmacaoExcluirLivro(Model model, @RequestParam String id){
+    public String carregarCaixaConfirmacaoExcluirLivro(Model model, @RequestParam String id) {
         model.addAttribute("confirmacaoExcluir", "Deseja mesmo excluir o livro?");
         model.addAttribute("idLivroExcluir", id);
 
@@ -74,8 +75,9 @@ public class LivroController {
         model.addAttribute("livros", livros);
         return "cadastrar-livro";
     }
+
     @PostMapping(value = "/excluir-livro")
-    public String excluirLivro(String id){
+    public String excluirLivro(String id) {
         livroService.excluir(id);
         return "redirect:/cadastrar-livro";
     }

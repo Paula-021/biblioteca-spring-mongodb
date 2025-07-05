@@ -28,17 +28,17 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     public List<Emprestimo> getAll() {
         List<Emprestimo> emprestimos = emprestimoRepository.findAll();
 
-        for(Emprestimo emprestimo : emprestimos){ //iterar sobre a lista de emprestimos
+        for (Emprestimo emprestimo : emprestimos) { //iterar sobre a lista de emprestimos
             String idLivro = emprestimo.getLivro().getId(); //pegar o id do livro
             Optional<Livro> livroOptional = livroRepository.findById(idLivro);
-            if(livroOptional.isPresent()){
+            if (livroOptional.isPresent()) {
                 Livro livro = livroOptional.get(); //pegar o livro
                 emprestimo.setLivro(livro);
             }
 
             String idUsuario = emprestimo.getUsuario().getId(); //pegar o id do usuario
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
-            if(usuarioOptional.isPresent()){
+            if (usuarioOptional.isPresent()) {
                 Usuario usuario = usuarioOptional.get(); //pegar o usuário
                 emprestimo.setUsuario(usuario);
             }

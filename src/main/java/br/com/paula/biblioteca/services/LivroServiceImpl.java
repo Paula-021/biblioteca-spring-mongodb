@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LivroServiceImpl  implements LivroService  { // -> classe serviço usada para tratamento de dados
+public class LivroServiceImpl implements LivroService { // -> classe serviço usada para tratamento de dados
     //implementação dos métodos da interface LivroService
 
     @Autowired
@@ -30,7 +30,7 @@ public class LivroServiceImpl  implements LivroService  { // -> classe serviço 
     @Override
     public Livro getById(String id) {
         Optional<Livro> livroOptional = livroRepository.findById(id);
-        if(livroOptional.isPresent()) {
+        if (livroOptional.isPresent()) {
             return livroOptional.get();
         }
         return null;

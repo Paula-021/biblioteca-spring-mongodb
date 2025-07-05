@@ -18,7 +18,7 @@ public class EmprestimoDTO { //DTO -> Data Transfer Object -> Objeto de Transfer
 
     private static final DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public Emprestimo paraEntidade(){
+    public Emprestimo paraEntidade() {
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setId(idEmprestimo);
 

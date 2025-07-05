@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface LivroService  {
+public interface LivroService {
 
     void cadastrar(Livro livro); //declarar métodos de serviço porém NÃO implementá-los
 
